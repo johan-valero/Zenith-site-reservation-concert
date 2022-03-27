@@ -1,0 +1,29 @@
+{% extends "event/index.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block contenue %}
+    <h1 class="title2">Compte de {{request.user.username}} </h1>
+    <div class="containerInfo">
+        <div class="info_detail">
+            <p class="p_detail">Pseudo<br>{{request.user.username}}</p>
+            <p class="p_detail">Prénom<br>{{request.user.last_name}}</p>
+            <p class="p_detail">Nom<br>{{request.user.first_name}}</p>
+        </div>
+    </div>
+
+    <h3 class="title4">Vos billets</h3>
+    {% for event_list in eventList %}
+    <div class="containerBillet">
+        <div class="fancy-btn">
+            <h2>{{event_list.name_event}}</h2>
+            {% for group in event_list.group.all %}
+                <h2>{{group.name_group}}</h2>
+            {% endfor %}
+                {% language 'fr' %}
+                    <h2>{{event_list.begin_date}}</h2>
+                {% endlanguage %}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

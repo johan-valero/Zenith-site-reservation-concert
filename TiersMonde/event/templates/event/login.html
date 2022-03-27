@@ -1,0 +1,28 @@
+{% extends 'event/index.html' %}
+{% load static %}
+{% block contenue %}
+
+    <div class="container_login">
+        <div class="card_login">
+            <div class="card-image">
+                <h1 class="card-heading title2">Identifiez-vous</h1>
+            </div>
+            <a class="a_detail" href="{% url 'event:register' %}">Pas de compte ? Inscrivez-vous !</a>
+            <form class="card-form" id="login" method="post" action="{% url 'event:welcome' %}">
+                {% csrf_token %}
+                <div class="input_login">
+                    <input type="text" class="input-field" id="username" name="username" required />
+                    <label class="input-label">Pseudo</label>
+                </div>
+                <div class="input_login">
+                    <input type="password" class="input-field" id="password" name="password" required />
+                    <label class="input-label">Mot de passe</label>
+                </div>
+                <div class="action_login">  
+                    <input class="bouton_login" type="submit" value="Connexion">
+                    <input type="hidden" name="{{next}}">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

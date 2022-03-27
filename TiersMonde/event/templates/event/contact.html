@@ -1,0 +1,30 @@
+{% extends 'event/index.html' %}
+{% load static %}
+{% block contenue %}
+<div class="containerContact">
+    <h1 class="title2">Contact</h1>
+    <div class="container_contact">
+        <form id="contact_form" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <label class="contact_label" for="name">Votre nom:</label><br/>
+                <input id="name" class="input" name="name" type="text" value="" size="30" placeholder="Votre nom ici"/><br/>
+                <span id="name_validation" class="error_message"></span>
+            </div>
+            <div class="row">
+                <label class="contact_label" for="email">Votre adresse mail:</label><br/>
+                <input id="email" class="input" name="email" type="text" value="" size="30" placeholder="Votre mail ici"/><br/>
+                <span id="email_validation" class="error_message"></span>
+            </div>
+            <div class="row">
+                <label class="contact_label" for="message">Votre commentaire et/ou suggestion:</label><br/>
+                <textarea id="message" class="input" name="message" rows="7" cols="30" placeholder="Votre commentaire ici"></textarea><br/>
+                <span id="message_validation" class="error_message"></span>
+            </div>
+            <div class="boutonIndex">
+                <a class="fancy-btn" type="submit">Envoyer</a>
+            </div>
+        </form>
+        <iframe width="500" height="400" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4005538501774!2d78.03995351561748!3d27.17514478301518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sfr!2sfr!4v1648206481565!5m2!1sfr!2sfr" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+{% endblock %}

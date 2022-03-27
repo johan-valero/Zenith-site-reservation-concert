@@ -1,0 +1,54 @@
+{% extends 'event/index.html' %}
+{% load static %}
+{% load i18n %}
+
+    {% block contenue %}
+    
+    {% for group in event.group.all %}
+    {% if group.pics_group %}
+            <div class="containerDetailHeader">
+                <h1 class="title2">{{ group.name_group }}</h1>
+                {% language 'fr' %}
+                <p class="date_detail"><strong>{{ event.begin_date }}</strong> - <strong>{{ event.end_date}}</strong></p>
+                {% endlanguage %}
+
+                {% if not request.user.is_authenticated %}
+                    <p class="p_detail">Connectez-vous pour acheter ou reserver !</p>
+                {% else %}
+                    <div class="bouton_detail">
+                        <a href="{% url 'event:acheter' event.id %}"><input class="bouton_login" type="submit" value="Acheter"></a>
+                        <!-- <a href="{% url 'event:acheter' event.id %}" class="fancy-btn">Acheter</a> -->
+                    </div>
+                {% endif %}
+                <img class="img_group_detail" src="{{ group.pics_group.url }}">
+            </div>
+        {% endif %} 
+        <h1 class="title2"> Artistes</h1>
+        <div class="container_img_detail">
+        {% for artist in group.artist.all %}
+            {% if artist.pics_artist %}
+                <div class="div_img_artist_detail">
+                    <img class="img_artist_detail" src="{{ artist.pics_artist.url }}">
+                    <p class="p_detail">{{ artist.name_artist }}</p>
+                </div>
+            {% endif %} 
+        {% endfor %}
+        </div>
+    <div class="containerInfo">
+        <h1 class="title2">Informations</h1>
+        <div class="info_detail">
+            <p class="p_detail">TYPE<br>{{ event.type }}</p>
+            <div id="traitBas"></div>
+            <p class="p_detail">NOMBRE DE PLACES<br> {{ event.av_ticket }} places disponibles</p>
+            <div id="traitBas"></div>
+            <p class="p_detail">DESCRIPTION <br>{{ event.description_event }}</p>
+            <div id="traitBas"></div>
+            <p class="p_detail">GROUPE<br> {{ group.name_group }}</p>
+            <div id="traitBas"></div>
+            <p class="p_detail">CATEGORIE<br> {{ group.type_group }}</p>
+            <a class="fancy-btn" href="{% url 'event:index' %}">Accueil</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% endblock %}

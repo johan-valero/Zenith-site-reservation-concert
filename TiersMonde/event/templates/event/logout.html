@@ -1,0 +1,9 @@
+{% extends 'event/index.html' %}
+{% load static %}
+
+    {% block contenue %}
+    <div class="containerInfo">
+        <h3 class="title4">Merci de votre visite, à bientôt</h3>
+        <a class="fancy-btn" href="{% url 'event:index' %}">Accueil</a>
+    </div>
+    {% endblock %}

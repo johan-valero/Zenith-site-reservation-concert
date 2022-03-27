@@ -1,0 +1,40 @@
+{% extends "event/index.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block contenue %}
+
+<h1 class="title2">Tous les évènements</h1>
+{% if event_list %}
+<ul class="prog">
+    {% for event in event_list %}
+    <li>
+    <div class="content-wrapper">
+        <div class="news-card">
+        {% for group in event.group.all %}
+        {% if group.pics_group %}
+        <img class="news-card__image" src="{{ group.pics_group.url }}"><br>
+        {% endif %}
+        {% endfor %}
+        <div class="news-card__text-wrapper">
+            <h3 class="news-card__title">{{ event.name_event }}</h3><br>
+            {% language 'fr' %}
+            <div class="news-card__post-date">Du {{ event.begin_date|date:'d F Y' }} au {{ event.end_date|date:'d F Y' }}</div><br>
+            {% endlanguage %}
+            <div class="news-card__details-wrapper">
+                <p class="news-card__excerpt">{{ event.description_event }}&hellip;</p>
+                <div class="boutonIndex">
+                    <a href="{% url 'event:detail' event.id %}" class="fancy-btn">Informations/Réservations</a><br>
+                </div>     
+            </div>
+        </div>
+        </div>
+    </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Pas d'évènements disponible</p>
+{% endif %}
+
+{% endblock %}

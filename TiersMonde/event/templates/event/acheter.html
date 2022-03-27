@@ -1,0 +1,19 @@
+{% extends 'event/index.html' %}
+{% load static %}
+
+{% block contenue %}
+<h1 class="title4">Félicitation</h1>
+{% for group in event.group.all %}
+<h1 class="p_detail"">Votre commande a bien été pris en compte par notre site de réservation.</h1>
+<p class="p_detail">Le <strong>{{ event.begin_date }}</strong> se tiendra le <strong>{{ event.type }} {{ event.name_event }} avec {{ group.name_group }}</strong>
+  <br>
+  - L'acheteur est responsable de l'utilisation du billet
+  <br>
+  - Seule la première personne se présentant avec le billet sera admise à l'évènement.
+</p>
+{% endfor %}
+<div class="boutonIndex">
+    <a class="fancy-btn" href="{% url 'event:index' %}">Accueil</a>
+    <a class="fancy-btn" href="{% url 'event:profil' %}">Profil</a>
+</div>
+{% endblock %}

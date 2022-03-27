@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'event/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" /><!--Wrapper -->
+    <script src="https://kit.fontawesome.com/8e8d5e63b3.js"></script><!--Icone -->
+    <title>Accueil</title>
+</head>
+
+<body>
+    <div class="header_container">
+        <img class="logo" src="{% static 'event/images/logo_tiers_monde.png' %}">
+        <nav>
+            <div class="left">
+                <ul>
+                    <li><a href="{% url 'event:index' %}">Accueil</a></li>
+                    <li><a href="{% url 'event:liste' %}">évènements</a></li>
+                    <!-- <li><a href="#">Salles</a></li> -->
+                    <li><a href="{% url 'event:informations' %}">Informations</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <ul>
+                    {% if not request.user.is_authenticated %}
+                        <li><a href="{% url 'event:login' %}">Connexion</a></li>
+                        <li><a href="{% url 'event:register' %}">Inscription</a></li>
+                    {% else %}
+                        <li><a href="{% url 'event:profil' %}">Profil</a></li>
+                        <li><a href="{% url 'event:logout' %}">Déconnexion</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    {% block contenue %}
+        <div class="title_container">
+            <h1>Zenith du Tiers Monde</h1>
+            <p>Adrar Project by Gokool, Valentin, David and Johan.</p>
+            <div class="boutonIndex">
+                <a href="#programmation" class="fancy-btn">Programmation</a><br>
+            </div>
+        </div>
+
+        <div id="stripped">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1062">
+                <polyline points="0,154 131,0 0,348 269,0 0,562 437,0 
+                0,766 565,14 0,1062 719,0 289,1062 843,0 543,1062 995,0 729,1062 1161,0 947,1062 1307,0 1143,1062 1500,162 1299,1062 1500,830"/>
+            </svg>
+        </div>
+
+<!-- --------------------SLIDER --------------------------->
+<h2 class="title2">Nouveautés</h2>
+<div class="swiper">
+    <div class="swiper-wrapper">
+                    {% for event in event_list %}
+                        {% for group in event.group.all %}
+                        <div class="swiper-slide">
+                            <div class="slider-box">
+                                {% if group.pics_group %}
+                                <img class="img_slider" src="{{ group.pics_group.url }}">
+                                {% endif %}
+                            </div>
+                            <div class="text_slider stripped2">                            
+                                <h2 class="title3">{{ event.name_event }}</h2>
+                                <h2 class="title3">{{ event.av_ticket }} places disponible</h2>
+                                {% language 'fr' %}
+                                <h2 class="title3">{{ event.begin_date|date:'d F Y' }}</h2>
+                                {% endlanguage %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+        </div><!--fin du swiper wrapper -->   
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+    </div><!--fin du swiper contenaire -->
+
+<!-- --------------------PROGRAMMATION --------------------------->
+    {% if event_list %}
+        <h2 id="programmation" class="title2">Programmation</h2>
+        <ul class="prog">
+            {% for event in event_list %}
+            <li>
+            <div class="content-wrapper">
+                <div class="news-card">
+                {% for group in event.group.all %}
+                {% if group.pics_group %}
+                <img class="news-card__image" src="{{ group.pics_group.url }}"><br>
+                {% endif %}
+                {% endfor %}
+                <div class="news-card__text-wrapper">
+                    <h3 class="news-card__title">{{ event.name_event }}</h3><br>
+                    {% language 'fr' %}
+                    <div class="news-card__post-date">Du {{ event.begin_date|date:'d F Y' }} au {{ event.end_date|date:'d F Y' }}</div><br>
+                    {% endlanguage %}
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">{{ event.description_event }}&hellip;</p>
+                        <div class="boutonIndex">
+                            <a href="{% url 'event:detail' event.id %}" class="fancy-btn">Informations/Réservations</a><br>
+                        </div>     
+                    </div>
+                </div>
+                </div>
+            </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Pas d'évènements disponible</p>
+    {% endif %}
+
+    <!-- --------------------QUOTE --------------------------->
+    <h2 class="title2">Avis</h2>
+    <div class="blockquote-wrapper">
+        <div class="blockquote">
+            <h1>
+                Aussi bon qu'un<span style="color:#ffffff"> balisto !</span>
+            </h1>
+            <h4>&mdash;Maxime Pryzbylo<br><em>Critique de renommée international</em></h4>
+        </div>
+        <div class="blockquote">
+            <h1>
+                Une organisation digne des meilleurs <span style="color:#ffffff"> MCD - MLD que je n'ai jamais connu !</span>
+            </h1>
+            <h4>&mdash;Florence Calmette<br><em>Directrice régional du théatre Adrar</em></h4>
+        </div>
+        <div class="blockquote">
+            <h1>
+                Ça c'est mes <span style="color:#ffffff"> Devops.</span>
+            </h1>
+            <h4>&mdash;Maxime Pryzbylo (encore)<br><em>Critique de renommée international</em></h4>
+        </div>
+    </div>
+    {% endblock %}
+
+    <!-- Site footer -->
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <img class="logo" src="{% static 'event/images/logo_tiers_monde.png' %}">
+            <p class="footer-links">
+                <a href="{% url 'event:index' %}" class="link-1">Accueil</a>
+                <a href="{% url 'event:informations' %}">Informations</a>
+                <a href="{% url 'event:login' %}">Connexion</a>
+                <a href="{% url 'event:faq' %}">Faq</a>
+                <a href="{% url 'event:contact' %}">Contact</a>
+            </p>
+            <p class="footer-company-name"> Adrar Formation TP© 2022</p>
+        </div>
+        <div class="footer-center">
+            <h2 class="title_footer">Coordonnées</h2>
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>11 avenue de l'Europe</span> Ramonville, Toulouse</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>07 71 81 80 20</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:zenith_du_tiers_monde@gmail.com">zenith_du_tiers_monde@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+        <p class="footer-company-about">
+            <h2 class="title_footer">A propos</h2>
+            <p>Designed by Mojo_Jojo© / Powered by San Gokool©</p>
+            <p>Sustained by Kheandee© and Ace©</p>
+            <p>Remerciements à Maxime Torlois pour sa participation</p>
+        </p>
+        <div class="footer-icons">
+            <a href="https://fr-fr.facebook.com/lesoubliesdutiersmonde/"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/johan-valero/Zenith_Tiers_Monde"><i class="fa fa-github"></i></a>
+        </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="{% static 'event/script.js' %}"></script>
+</body>
+</html>
