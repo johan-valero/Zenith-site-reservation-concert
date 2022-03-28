@@ -6,9 +6,14 @@
     <h1 class="title2">Compte de {{request.user.username}} </h1>
     <div class="containerInfo">
         <div class="info_detail">
-            <p class="p_detail">Pseudo<br>{{request.user.username}}</p>
-            <p class="p_detail">Prénom<br>{{request.user.last_name}}</p>
-            <p class="p_detail">Nom<br>{{request.user.first_name}}</p>
+            <p class="p_detail">PSEUDO</p>
+            <p class="p_detail">{{request.user.username}}</p>
+            <div id="traitBas"></div>
+            <p class="p_detail">PRENOM
+            <p class="p_detail">{{request.user.last_name}}</p>
+            <div id="traitBas"></div>
+            <p class="p_detail">NOM
+            <p class="p_detail">{{request.user.first_name}}</p>
         </div>
     </div>
 
@@ -23,7 +28,7 @@
             {% language 'fr' %}
                 <h2>{{event_list.begin_date}}</h2>
             {% endlanguage %}
-            Nombre de tickets achetés : {{nb_ticket}} 
+            {{nb_ticket}} places
         </div>
     <div class="bouton_billets">
         <a href="{% url 'event:detail' event_list.id %}"><input class="bouton_login" type="submit" value="Detail"></a>

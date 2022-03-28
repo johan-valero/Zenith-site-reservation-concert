@@ -17,7 +17,6 @@
                 {% else %}
                     <div class="bouton_detail">
                         <a href="{% url 'event:acheter' event.id %}"><input class="bouton_login" type="submit" value="Acheter"></a>
-                        <!-- <a href="{% url 'event:acheter' event.id %}" class="fancy-btn">Acheter</a> -->
                     </div>
                 {% endif %}
                 <img class="img_group_detail" src="{{ group.pics_group.url }}">
