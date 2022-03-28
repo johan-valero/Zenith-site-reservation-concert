@@ -23,7 +23,8 @@
                 {% language 'fr' %}
                     <h2>{{event_list.begin_date}}</h2>
                 {% endlanguage %}
-        </div>
+            </div>
+            <a href="{% url 'event:annuler' event_list.id %}"><input class="bouton_login" type="submit" value="Annuler"></a>
     </div>
     {% endfor %}
 {% endblock %}

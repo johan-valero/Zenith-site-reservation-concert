@@ -18,6 +18,6 @@ urlpatterns = [
     path('<int:event_id>/detail/acheter/', views.acheter, name='acheter'),
     path('faq/', views.faq, name='faq'),
     path('profil/', views.profil, name='profil'),
-    path('profil/annuler/<int:event_id>', views.annuler, name='annuler'),
+    path('annuler/<int:event_id>', views.annuler, name='annuler'),
     # path('<int:event_id>/detail/reserver/', views.reserver, name='reserver'),
 ]

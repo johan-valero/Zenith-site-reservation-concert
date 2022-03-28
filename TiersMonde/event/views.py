@@ -78,18 +78,6 @@ def profil(request):
     context = {'eventList':eventList}
     return render(request, 'event/profil.html', context)
 
-
-# def acheter(request, event_id):
-#     event = Events.objects.get(pk=event_id)
-#     # achat = Achat.objects.get(pk=event_id)
-#     event.users = request.user
-#     event.av_ticket -=1
-#     event.users.billets_user += 1 
-#     event.save()
-#     # achat.save()
-#     context = {'event':event }
-#     return render(request, 'event/acheter.html', context)
-
 def acheter(request, event_id):
     event = Events.objects.get(pk=event_id)
     try:
@@ -107,9 +95,13 @@ def acheter(request, event_id):
 
 def annuler(request,event_id):
     event = Events.objects.get(pk=event_id)
-    event.users.remove(request.user)
-    event.billets_user -= 1 
+    achat = Achat.objects.get(event = event, user = request.user)
+    achat.billets_user -= 1
+    achat.save()
+
+    if achat.billets_user == 0:
+        achat.delete()
     event.av_ticket +=1
     event.save()
-    context = {'event':event }
+    context = { 'event':event }
     return render(request, 'event/annuler.html', context)

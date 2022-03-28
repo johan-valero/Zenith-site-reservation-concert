@@ -180,7 +180,7 @@ nav li a:hover{
 /* ----------------------------BACKGROUND ANIMATION INDEX--------------------------------- */
 
 div#stripped {
-    max-width: 1300px;
+    max-width: 1200px;
     /* max-height: 1000px; */
     margin: 0 auto;
     background: #000;
@@ -200,10 +200,10 @@ div#stripped svg polyline {
     height: 100vh;
     fill: none;
     stroke: #f00;
-    stroke-width: 180;
+    stroke-width: 160;
     stroke-dasharray: 20000;
     stroke-dashoffset: 20000;
-    animation: scribble 4s linear forwards;
+    animation: scribble 4s ease-in-out forwards;
 }
 
 /* Animation du scribble */
