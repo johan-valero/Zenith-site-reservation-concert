@@ -180,7 +180,7 @@ nav li a:hover{
 /* ----------------------------BACKGROUND ANIMATION INDEX--------------------------------- */
 
 div#stripped {
-    max-width: 1200px;
+    max-width: 1300px;
     /* max-height: 1000px; */
     margin: 0 auto;
     background: #000;
@@ -944,4 +944,126 @@ div#stripped2 svg polyline {
     height: 150px;
     margin: 10px;
     padding: 10px;
+}
+
+
+/* -------------------------------PALN SALLE------------------------------ */
+
+
+.imageMap__container {
+    width: 800px;    
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    position: relative;
+    margin-left: 30%;
+    animation: showup 7s forwards;
+
+}
+.imageMap__container img {
+    width: 100%;
+    height: auto;
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.markers {
+    background: #000;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 50%;
+    border-color: rgb(230, 16, 16);
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    align-self: center;
+    justify-self: center;
+    cursor: pointer;
+    animation: ownpulse 2s cubic-bezier(.19,1,.22,1) infinite both;
+    position: relative;
+}
+.markers:focus-within .marker__card, .markers:focus .marker__card {
+    display: block;
+}
+
+.marker__card {
+    background-color: #fefefe;
+    padding: 1.5rem;
+    display: none;
+    /* margin-top: -5%; */
+    min-height: 100px;
+    position: absolute;
+    bottom: 32px;
+    right: 0;
+    width: 30%;
+    z-index: 100;
+    -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
+    min-width: 220px;
+    max-width: 300px;
+    animation: fadeInUp;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+    border-radius: 5px;
+}
+
+.marker__card__title {
+    /* font: 31px/1.2 'Georgia', serif; */
+    font-family: 'Rocked', sans-serif;
+    margin-top: 0;
+    /* margin-bottom: 1rem; */
+}
+  /* animations */
+@keyframes ownpulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 #fff;
+        box-shadow: 0 0 0 0 #fff;
+    }
+    50% {
+        -webkit-box-shadow: 0 0 0 40px rgba(92,112,214,0);
+        box-shadow: 0 0 0 40px rgba(21, 52, 209, 0);
+    }
+    0% {
+        -webkit-box-shadow: 0 0 0 0 #fff;
+        box-shadow: 0 0 0 0 rgb(8, 1, 1);
+    }
+    50% {
+        -webkit-box-shadow: 0 0 0 40px rgba(92,112,214,0);
+        box-shadow: 0 0 0 40px rgba(20, 53, 219, 0);
+    }
+}
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale3d(.3,.3,.3);
+        -webkit-transform: scale3d(.3,.3,.3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+@keyframes fadeInUp {
+    0% {
+    opacity: 0;
+    transform: scale3d(.3,.3,.3) translate3d(0,100%,0);
+    -webkit-transform: scale3d(.3,.3,.3);
+    -webkit-transform: translate3d(0,100%,0);
+}
+100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
+0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: scale3d(.3,.3,.3) translate3d(0,100%,0);
+}
+100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
 }

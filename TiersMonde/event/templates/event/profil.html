@@ -23,11 +23,6 @@
             {% language 'fr' %}
                 <h2>{{event_list.begin_date}}</h2>
             {% endlanguage %}
-                {% for users in event_list %}
-                    {% for billets in users %}
-                <h2>{{ billets.billets_user }} places</h2>
-                    {% endfor %}
-                {% endfor%}
             </div>
     <div class="bouton_billets">
         <a href="{% url 'event:detail' event_list.id %}"><input class="bouton_login" type="submit" value="Detail"></a>

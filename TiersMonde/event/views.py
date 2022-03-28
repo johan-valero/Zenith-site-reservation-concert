@@ -105,3 +105,6 @@ def annuler(request,event_id):
     event.save()
     context = { 'event':event }
     return render(request, 'event/annuler.html', context)
+
+def salle(request):
+    return render(request, 'event/salle.html')

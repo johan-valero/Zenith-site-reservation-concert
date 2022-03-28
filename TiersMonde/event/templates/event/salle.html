@@ -1,0 +1,57 @@
+{% extends "event/index.html" %}
+{% load static %}
+
+{% block contenue %}
+<h1 class="title4">Plan des salles</h1>
+<div class="imageMap__container">
+    <img src="{% static 'event/images/salle.png' %}">
+    <div class="markers" tabindex="0" style="grid-column: 4/6; grid-row: 2/8;">
+        <div class="marker__card">
+                <p class="marker__card__title">
+                    Salle Kheandee
+                </p>
+                <p>Réservé au moins de 15 ans</p>
+            </div>
+    </div>
+    <div class="markers" tabindex="0" style="grid-column: 4/8; grid-row: 1/3;">
+            <div class="marker__card">
+                    <p class="marker__card__title">
+                    Salle Ace
+                    </p>
+                    <p>Réservé au handicapés et au plus de 64 ans</p>
+            </div>
+    </div>
+    <div class="markers" tabindex="0" style="grid-column: 6/10; grid-row: 4/4;">
+        <div class="marker__card">
+                <p class="marker__card__title">
+                Salle San Gokool
+                </p>
+                <p>Réservé au handicapés et au plus de 3ans</p>
+        </div>
+    </div>
+    <div class="markers" tabindex="0" style="grid-column: 8/10; grid-row: 8/8;">
+        <div class="marker__card">
+                <p class="marker__card__title">
+                Salle Mojo-Jojo
+                </p>
+                <p>Réservé au handicapés et au tissmey</p>
+        </div>
+    </div>
+    <div class="markers" tabindex="0" style="grid-column: 1/8; grid-row: 7/8;">
+        <div class="marker__card">
+                <p class="marker__card__title">
+                Salle Torlois
+                </p>
+                <p>Cette salle est vide.</p>
+        </div>
+    </div>
+    <div class="markers" tabindex="0" style="grid-column: 4/8; grid-row: 5/8;">
+        <div class="marker__card">
+                <p class="marker__card__title">
+                Accueil
+                </p>
+                <p>Pour toutes informations "importantes"</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

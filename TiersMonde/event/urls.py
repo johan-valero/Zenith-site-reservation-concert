@@ -19,5 +19,6 @@ urlpatterns = [
     path('faq/', views.faq, name='faq'),
     path('profil/', views.profil, name='profil'),
     path('annuler/<int:event_id>', views.annuler, name='annuler'),
+    path('salle/', views.salle, name='salle'),
     # path('<int:event_id>/detail/reserver/', views.reserver, name='reserver'),
 ]
