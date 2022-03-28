@@ -13,7 +13,7 @@
     </div>
 
     <h3 class="title4">Vos billets</h3>
-    {% for event_list in eventList %}
+    {% for event_list, nb_ticket in nbTicketList.items %}
     <div class="containerBillet">
         <div class="fancy-btn">
             <h2>{{event_list.name_event}}</h2>
@@ -23,7 +23,8 @@
             {% language 'fr' %}
                 <h2>{{event_list.begin_date}}</h2>
             {% endlanguage %}
-            </div>
+            Nombre de tickets achetés : {{nb_ticket}} 
+        </div>
     <div class="bouton_billets">
         <a href="{% url 'event:detail' event_list.id %}"><input class="bouton_login" type="submit" value="Detail"></a>
         <a href="{% url 'event:annuler' event_list.id %}"><input class="bouton_login" type="submit" value="Annuler"></a>

@@ -70,12 +70,11 @@ def liste(request):
     return render(request, 'event/liste.html', context)
 
 def profil(request):
-    eventList = []
-    for event_list in Events.objects.all():
-        for user_list in event_list.users.all():
-            if user_list == request.user:
-                eventList.append(event_list)
-    context = {'eventList':eventList}
+    eventList = request.user.events_set.all()
+    nbTicketList = {}
+    for event in eventList:
+        nbTicketList[event] = request.user.achat_set.get(event=event).billets_user
+    context = {'nbTicketList':nbTicketList}
     return render(request, 'event/profil.html', context)
 
 def acheter(request, event_id):
@@ -98,7 +97,6 @@ def annuler(request,event_id):
     achat = Achat.objects.get(event = event, user = request.user)
     achat.billets_user -= 1
     achat.save()
-
     if achat.billets_user == 0:
         achat.delete()
     event.av_ticket +=1
