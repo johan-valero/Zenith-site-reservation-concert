@@ -79,15 +79,30 @@ def profil(request):
     return render(request, 'event/profil.html', context)
 
 
+# def acheter(request, event_id):
+#     event = Events.objects.get(pk=event_id)
+#     # achat = Achat.objects.get(pk=event_id)
+#     event.users = request.user
+#     event.av_ticket -=1
+#     event.users.billets_user += 1 
+#     event.save()
+#     # achat.save()
+#     context = {'event':event }
+#     return render(request, 'event/acheter.html', context)
+
 def acheter(request, event_id):
     event = Events.objects.get(pk=event_id)
-    achat = Achat.objects.get(pk=event_id)
-    event.users.add(request.user)
-    event.av_ticket -=1
-    event.users.achat.billets_user += 1 
+    try:
+        achat = Achat.objects.get(user = request.user, event = event)
+    except Achat.DoesNotExist:
+        achat = event.users.add(request.user)
+    finally:
+        achat = Achat.objects.get(event = event, user = request.user)
+        achat.billets_user += 1
+        event.av_ticket -=1
     event.save()
     achat.save()
-    context = {'event':event }
+    context = { 'event':event }
     return render(request, 'event/acheter.html', context)
 
 def annuler(request,event_id):
