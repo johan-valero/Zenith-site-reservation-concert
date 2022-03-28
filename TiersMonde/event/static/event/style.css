@@ -682,6 +682,12 @@ div#stripped svg polyline {
     text-align: center;
 }
 
+.p_detail1{
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}
+
 .a_detail{
     text-align: center;
     color: #fff;
