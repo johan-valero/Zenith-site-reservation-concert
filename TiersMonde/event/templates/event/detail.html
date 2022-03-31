@@ -15,9 +15,13 @@
                 {% if not request.user.is_authenticated %}
                     <p class="p_detail">Connectez-vous pour acheter ou reserver !</p>
                 {% else %}
+                {% if event.av_ticket > 0 %}
                     <div class="bouton_detail">
                         <a href="{% url 'event:acheter' event.id %}"><input class="bouton_login" type="submit" value="Acheter"></a>
                     </div>
+                {% else %}
+                    <p class="p_detail">Plus de places disponible</p>
+                {% endif%}
                 {% endif %}
                 <img class="img_group_detail" src="{{ group.pics_group.url }}">
             </div>

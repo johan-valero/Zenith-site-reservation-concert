@@ -37,15 +37,18 @@ def registered(request):
     firstname = request.POST['user_firstname']
     pwd = request.POST['user_pwd']
     email = request.POST['user_email']
-    username = firstname[0].lower() + "." + name.lower()     
-    user = User.objects.create_user(username, email, pwd)
-    utilisateur = Users(user=user)
-    user.last_name = name
-    user.first_name = firstname
-    user.save()
-    utilisateur.save()
-    context = {'user':user}
-    return render(request, 'event/registered.html', context)
+    username = firstname[0].lower() + "." + name.lower()
+    if username is None:
+        user = User.objects.create_user(username, email, pwd)
+        utilisateur = Users(user=user)
+        user.last_name = name
+        user.first_name = firstname
+        user.save()
+        utilisateur.save()
+        context = {'user':user}
+        return render(request, 'event/registered.html', context)
+    else:
+        return render(request, 'event/error_log2.html')
 
 def welcome(request):
     username = request.POST['username']
@@ -86,11 +89,16 @@ def acheter(request, event_id):
     finally:
         achat = Achat.objects.get(event = event, user = request.user)
         achat.billets_user += 1
-        event.av_ticket -=1
-    event.save()
-    achat.save()
-    context = { 'event':event }
-    return render(request, 'event/acheter.html', context)
+        if event.av_ticket == 0:
+            print("ok")
+            event.av_ticket += 0
+        else:
+            print("ko")
+            event.av_ticket -=1
+            event.save()
+            achat.save()
+            context = { 'event':event }
+            return render(request, 'event/acheter.html', context)
 
 def annuler(request,event_id):
     event = Events.objects.get(pk=event_id)
