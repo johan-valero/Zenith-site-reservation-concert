@@ -148,18 +148,18 @@ class AchatBilletView(TestCase):
 
         def test_purchase_many_tickets(self):
             """ test_index_events_by_id Test d'achat de plusieurs tickets"""
-        create_user("fred", "fred@fred", "fred")
-        self.client.login(username="fred", password="fred")
-        typeEvent = create_type_of_event("house")
-        event = create_events("test", 500, typeEvent)
-        artiste = create_artists("jean", "musique")
-        group = create_groups("band", "rock")
-        group.artist.add(artiste)
-        event.group.add(group)
-        event.av_ticket -= 5
-        url = reverse('event:acheter', args=(event.id,))
-        response = self.client.get(url)
-        self.assertEqual(event.av_ticket , 495)
+            create_user("fred", "fred@fred", "fred")
+            self.client.login(username="fred", password="fred")
+            typeEvent = create_type_of_event("house")
+            event = create_events("test", 500, typeEvent)
+            artiste = create_artists("jean", "musique")
+            group = create_groups("band", "rock")
+            group.artist.add(artiste)
+            event.group.add(group)
+            event.av_ticket -= 5
+            url = reverse('event:acheter', args=(event.id,))
+            response = self.client.get(url)
+            self.assertEqual(event.av_ticket , 495)
 
 # ------------------------ VERIFICATION DE l'ANNULATION DE BILLET ---------------------------------
 
